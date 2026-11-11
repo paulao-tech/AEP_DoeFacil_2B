@@ -1,0 +1,41 @@
+classDiagram
+class Doador {
+ -Long id
+ -String nome
+ -String telefone
+}
+class Doacao {
+ -Long id
+ -LocalDate dataRecebimento
+ -Doador doador
+ -List~ItemDoacao~ itens
+ +adicionarItem(ItemDoacao item) void
+}
+class ItemDoacao {
+ <<abstract>>
+ -Long id
+ -String descricao
+ -int quantidadeRecebida
+ -List~Distribuicao~ distribuicoes
+ +calcularSaldo() int
+ +descreverDetalhes() String*
+}
+class Roupa {
+ -String tamanho
+ -String condicao
+ +descreverDetalhes() String
+}
+class Alimento {
+ -LocalDate validade
+ +descreverDetalhes() String
+}
+class Distribuicao {
+ -Long id
+ -LocalDate data
+ -int quantidade
+}
+Doador "1" -- "0..*" Doacao
+Doacao "1" *-- "1..*" ItemDoacao
+ItemDoacao <|-- Roupa
+ItemDoacao <|-- Alimento
+ItemDoacao "1" -- "0..*" Distribuicao

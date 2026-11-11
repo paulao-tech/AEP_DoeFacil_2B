@@ -1,0 +1,30 @@
+erDiagram
+ doadores ||--o{ doacoes : realiza
+ doacoes ||--|{ itens_doacao : contem
+ itens_doacao ||--o{ distribuicoes : possui
+ doadores {
+  BIGINT id PK
+  VARCHAR nome
+  VARCHAR telefone
+ }
+ doacoes {
+  BIGINT id PK
+  BIGINT doador_id FK
+  DATE data_recebimento
+ }
+ itens_doacao {
+  BIGINT id PK
+  BIGINT doacao_id FK
+  VARCHAR tipo
+  VARCHAR descricao
+  INT quantidade_recebida
+  VARCHAR tamanho "Obrigatorio para roupa"
+  VARCHAR condicao "Obrigatorio para roupa"
+  DATE validade "Obrigatorio para alimento"
+ }
+ distribuicoes {
+  BIGINT id PK
+  BIGINT item_id FK
+  DATE data
+  INT quantidade
+ }
